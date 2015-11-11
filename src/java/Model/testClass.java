@@ -27,5 +27,8 @@ public class testClass {
     public int howToGetDank() {
         return memes;
     }
+    public void howToSetDank(int memes) {
+        this.memes = memes;
+    }
   
 }
