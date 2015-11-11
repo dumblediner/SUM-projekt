@@ -19,8 +19,13 @@ public class testClass {
     }
     
     public void hollaholla(){
-        this.dankint = memes;
-        
+        this.dankint = memes;   
+    }
+    public int getDankint() {
+        return dankint;
+    }
+    public void setDankint(int dankint) {
+        this.dankint = dankint;
     }
     
     public String cantStopThetrump(){
