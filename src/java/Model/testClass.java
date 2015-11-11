@@ -22,6 +22,5 @@ public class testClass {
         System.out.println("memes");
         System.out.println("memes");
         System.out.println("memes");
-        
     }
 }
