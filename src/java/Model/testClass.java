@@ -12,9 +12,19 @@ package Model;
 public class testClass {
     private int dankint = 0;
     private int memes = 1;
+ 
     
     
     public int getMemes() {
+        return memes;
+    }
+    public int getDankint() {
+        return dankint;
+    }
+    public void setDankint(int dankint) {
+        this.dankint = dankint;
+    }
+    public int howToGetDank() {
         return memes;
     }
   
