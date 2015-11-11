@@ -17,7 +17,5 @@ public class testClass {
     public int getMemes() {
         return memes;
     }
-    public void setMemes(int memes) {
-        this.memes = memes;
-    }
+  
 }
