@@ -10,5 +10,5 @@ package Model;
  * @author Dumblediner
  */
 public class testClass {
-    
+    private int dankint = 0;
 }
