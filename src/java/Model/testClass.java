@@ -31,4 +31,9 @@ public class testClass {
         this.memes = memes;
     }
   
+    
+    public void hollaholla(){
+        this.dankint = memes;
+        
+    }
 }
