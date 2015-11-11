@@ -17,4 +17,8 @@ public class testClass {
     public int getMemes() {
         return memes;
     }
+    
+    public void hollaholla(){
+        
+    }
 }
