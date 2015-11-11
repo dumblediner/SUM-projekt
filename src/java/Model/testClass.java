@@ -22,4 +22,8 @@ public class testClass {
         this.dankint = memes;
         
     }
+    
+    public String cantStopThetrump(){
+        return "DOLAN TRUMP 2020";
+    }
 }
