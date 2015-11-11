@@ -19,6 +19,7 @@ public class testClass {
     }
     
     public void hollaholla(){
+        this.dankint = memes;
         
     }
 }
