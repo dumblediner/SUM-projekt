@@ -12,4 +12,9 @@ package Model;
 public class testClass {
     private int dankint = 0;
     private int memes = 1;
+    
+    
+    public int getMemes() {
+        return memes;
+    }
 }
