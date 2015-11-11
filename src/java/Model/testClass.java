@@ -19,5 +19,9 @@ public class testClass {
     }
     public void setMemes(int memes) {
         this.memes = memes;
+        System.out.println("memes");
+        System.out.println("memes");
+        System.out.println("memes");
+        
     }
 }
