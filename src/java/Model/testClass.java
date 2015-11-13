@@ -38,4 +38,8 @@ public class testClass {
     public String cantStopThetrump(){
         return "DOLAN TRUMP 2020";
     }
+    
+    public String theMeaningOfLife(){
+        return "Polle Fiction";
+    }
 }
