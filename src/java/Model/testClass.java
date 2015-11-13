@@ -17,6 +17,13 @@ public class testClass {
     public int getMemes() {
         return memes;
     }
+    public void setMemes(int memes) {
+        this.memes = memes;
+        System.out.println("memes");
+        System.out.println("memes");
+        System.out.println("memes");
+    }
+        
     
     public void hollaholla(){
         this.dankint = memes;   
