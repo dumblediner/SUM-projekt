@@ -18,6 +18,17 @@ public class testClass {
     public int getMemes() {
         return memes;
     }
+    public void setMemes(int memes) {
+        this.memes = memes;
+        System.out.println("memes");
+        System.out.println("memes");
+        System.out.println("memes");
+    }
+        
+    
+    public void hollaholla(){
+        this.dankint = memes;   
+    }
     public int getDankint() {
         return dankint;
     }
@@ -39,5 +50,9 @@ public class testClass {
     
     public String cantStopThetrump(){
         return "DOLAN TRUMP 2020";
+    }
+    
+    public String theMeaningOfLife(){
+        return "Polle Fiction";
     }
 }
