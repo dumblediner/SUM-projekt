@@ -1,5 +1,8 @@
 package Model;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
@@ -9,6 +12,8 @@ import javax.inject.Named;
 public class Service {
     
     private final ArrayList<User> users;
+    private final ArrayList<Shift> substituteList;
+    
     
     public Service() {
         users = new ArrayList<>();
@@ -59,6 +64,22 @@ public class Service {
     
     public ArrayList< User> getUsers() {
         return users;
+    }
+    
+    public void createShift(LocalDate date, LocalTime startTime, LocalTime endTime, String zone){
+       //TODOO - mulig return statement
+    }
+    
+    public void deleteShift(Shift shift){
+        //TODOO
+    }
+    
+    public void AcceptShiftSwap(){
+        //TODOO - Admin skal acceptere bytning af vagter.
+    }
+    
+    public void RequestShift(Shift shift){
+        //TODOO
     }
 
 }

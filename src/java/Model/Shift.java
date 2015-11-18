@@ -5,7 +5,9 @@
  */
 package Model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 /**
@@ -13,23 +15,42 @@ import java.util.ArrayList;
  * @author Mikkel
  */
 public class Shift {
-    private LocalDateTime time;
+    private LocalDate date;
+    private LocalTime startTime;
+    private LocalTime endTime;
     private String zone; //Typen skal muligvis ændres
-    private ArrayList<User> substituteList;
+    private ArrayList<User> unassignedList;
     private User substitute;
-    
-    public Shift(LocalDateTime time, String zone){
-        this.time = time;
+    public Shift(LocalDate date, LocalTime startTime, LocalTime endTime, String zone){
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.zone = zone;
-        this.substituteList = new ArrayList<>();
+        this.unassignedList = new ArrayList<>();
     }
 
-    public LocalDateTime getTime() {
-        return time;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setTime(LocalDateTime time) {
-        this.time = time;
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
     }
 
     public String getZone() {
@@ -49,7 +70,7 @@ public class Shift {
     }
     
     public ArrayList<User> getSubstitutes(){
-        return new ArrayList<>(substituteList);
+        return new ArrayList<>(unassignedList);
     }
     
 }

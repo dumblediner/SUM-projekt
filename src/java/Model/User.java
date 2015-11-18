@@ -14,6 +14,8 @@ import java.util.ArrayList;
 public class User {
     private boolean admin;
     private ArrayList<String> expertises;
+    private ArrayList<Shift> desiredShifts;
+    private ArrayList<Shift> assignedShifts;
     private String name;
     private String middlename;
     private String surname;
@@ -106,6 +108,10 @@ public class User {
 
     public void setHomeAddress(String homeAddress) {
         this.homeAddress = homeAddress;
+    }
+    
+    public ArrayList<Shift> getShifts(){
+        return new ArrayList<>(desiredShifts);
     }
     
     
