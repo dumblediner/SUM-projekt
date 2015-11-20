@@ -12,18 +12,20 @@ import java.util.ArrayList;
  * @author Dumblediner
  */
 public class User {
+
     private boolean admin;
     private ArrayList<String> expertises;
     private String name;
     private String middlename;
     private String surname;
-    
+
     private String mobilePhone;
     private String homePhone;
     private String emailAddress;
     private String homeAddress;
+    private String password;
 
-    public User(boolean admin, String name, String middlename, String surname, String mobilePhone, String homePhone, String emailAddress, String homeAddress) {
+    public User(boolean admin, String name, String middlename, String surname, String mobilePhone, String homePhone, String emailAddress, String homeAddress, String password) {
         this.admin = admin;
         this.name = name;
         this.middlename = middlename;
@@ -32,9 +34,9 @@ public class User {
         this.homePhone = homePhone;
         this.emailAddress = emailAddress;
         this.homeAddress = homeAddress;
+        this.password = password;
     }
-    
-    
+
     //Simple getters and setters
     public boolean isAdmin() {
         return admin;
@@ -107,10 +109,16 @@ public class User {
     public void setHomeAddress(String homeAddress) {
         this.homeAddress = homeAddress;
     }
-    
-    
-}
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+}
 
 //TODO overvej arraylist til styring af hvilke zoner og kompetencer en bruger har.
 //sæt en zone til altid at have en specifik indeksplads, så data kan lagres så nemt som muligt

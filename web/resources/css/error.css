@@ -1,0 +1,51 @@
+
+html,body {
+    height:100%;
+    width:100%;
+    margin:0;
+}
+body {
+    position: relative; 
+    top: 0; 
+    left: 0; 
+    min-width: 100%;
+    min-height: 100%;
+    background: -webkit-linear-gradient(white, lightblue, blue); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(white, lightblue, blue); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(white, lightblue, blue); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(white, lightblue, blue); /* Standard syntax (must be last) */
+
+}
+
+html , body {
+    display:initial;
+    text-align: center;
+}
+form {
+    margin:auto;
+}
+h3 {
+    font-size: 40px;
+    color: darkblue;
+}
+
+#logaf {
+    background-color: #ccc;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius:6px;
+    color: #fff;
+    font-family: 'Oswald';
+    font-size: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    border:none;
+}
+
+
+
+#logaf:hover {
+    border: none;
+    background:blue;
+    box-shadow: 0px 0px 1px #777;
+}
