@@ -32,7 +32,7 @@ public class EmailSender {
     Sends email to a specified email address, must use a existing gmail account
     with working password
     */
-    public String sendEmail(String recipient, String subject, String text) throws MessagingException {
+    public String sendEmail(String recipient, String subject, String text) throws RuntimeException {
         Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
