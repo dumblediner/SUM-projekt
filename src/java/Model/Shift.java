@@ -4,73 +4,82 @@
  * and open the template in the editor.
  */
 package Model;
-
+ 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
-
+ 
 /**
  *
  * @author Mikkel
  */
 public class Shift {
     private LocalDate date;
-    private LocalTime startTime;
-    private LocalTime endTime;
-    private String zone; //Typen skal muligvis ændres
+    private double startTime;
+    private double endTime;
+    private String expertise; //Typen skal muligvis ændres
+    private int level; // Ekspertise niveau der er krævet
     private ArrayList<User> unassignedList;
     private User substitute;
-    public Shift(LocalDate date, LocalTime startTime, LocalTime endTime, String zone){
+   
+    public Shift(LocalDate date, double startTime, double endTime, String zone){
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.zone = zone;
+        this.expertise = zone;
         this.unassignedList = new ArrayList<>();
     }
-
+   
+   
+     public int getLevel() {
+        return level;
+    }
+ 
+    public void setLevel(int level) {
+        this.level = level;
+    }
+ 
     public LocalDate getDate() {
         return date;
     }
-
+ 
     public void setDate(LocalDate date) {
         this.date = date;
     }
-
-    public LocalTime getStartTime() {
+ 
+    public double getStartTime() {
         return startTime;
     }
-
-    public void setStartTime(LocalTime startTime) {
+ 
+    public void setStartTime(double startTime) {
         this.startTime = startTime;
     }
-
-    public LocalTime getEndTime() {
+ 
+    public double getEndTime() {
         return endTime;
     }
-
-    public void setEndTime(LocalTime endTime) {
+ 
+    public void setEndTime(double endTime) {
         this.endTime = endTime;
     }
-
-    public String getZone() {
-        return zone;
+ 
+    public String getExpertise() {
+        return expertise;
     }
-
-    public void setZone(String zone) {
-        this.zone = zone;
+ 
+    public void setExpertise(String zone) {
+        this.expertise = zone;
     }
-
+ 
     public User getSubstitute() {
         return substitute;
     }
-
+ 
     public void setSubstitute(User substitute) {
         this.substitute = substitute;
     }
-    
+   
     public ArrayList<User> getSubstitutes(){
         return new ArrayList<>(unassignedList);
     }
-    
+   
 }
