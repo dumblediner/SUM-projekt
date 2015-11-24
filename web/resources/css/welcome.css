@@ -28,7 +28,7 @@ h3 {
     font-size: 40px;
     color: darkblue;
 }
-#logud{
+.logudknap{
     background-color: #ccc;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -42,7 +42,7 @@ h3 {
 }
 
 
-#logud:hover {
+.logudknap:hover {
     border: none;
     background:blue;
     box-shadow: 0px 0px 1px #777;

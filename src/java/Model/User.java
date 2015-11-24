@@ -34,9 +34,11 @@ public class User {
         this.homeAddress = homeAddress;
         this.password = password;
     }
-   
- 
-   
+
+    public User() {
+
+    }
+
     //Simple getters and setters
  
  public String getPassword() {

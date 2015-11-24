@@ -11,31 +11,47 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
+import java.sql.PreparedStatement;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.inject.Named;
-import org.jboss.logging.Logger;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author nikolaj
  */
-@Named
+@SessionScoped
 @ManagedBean
-@RequestScoped
 public class LoginBean implements Serializable {
 
-//    private String username;
-//    private String password;
-//    private boolean admin;
-    private User user;
+    private String emailaddress;
+    private String password;
+    private User user = new User();
+
+    public String getEmailaddress() {
+        return emailaddress;
+    }
+
+    public void setEmailaddress(String emailaddress) {
+        this.emailaddress = emailaddress;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public User getUser() {
         return user;
     }
 
-    public static Statement s = null;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public static PreparedStatement s = null;
     public static ResultSet rs = null;
     public static String str = null;
 
@@ -44,12 +60,34 @@ public class LoginBean implements Serializable {
         String toReturn = "";
         try {
             conn = ConnectionToDB.getConnection();
-            s = conn.createStatement();
-            s.executeQuery("SELECT * FROM person WHERE navn = " + "'" + user.getEmailAddress() + "'" + " AND stilling =" + "'" + user.getPassword() + "'");
-            rs = s.getResultSet();
+            s = conn.prepareStatement("SELECT * FROM users WHERE emailaddress = ? AND pw =?");
+            s.setString(1, user.getEmailAddress());
+            s.setString(2, user.getPassword());
+//            s.executeQuery("SELECT * FROM users WHERE emailaddress = " + "'" + user.getEmailAddress() + "'" + " AND pw =" + "'" + user.getPassword() + "'");
+            rs = s.executeQuery();
             if (rs.next()) {
-                System.out.println("rs next");
-                toReturn = "welcome";
+                String name = rs.getString("name");
+                String middlename = rs.getString("middlename");
+                String surname = rs.getString("surname");
+                String email = rs.getString("emailaddress");
+                String mobilephone = rs.getString("mobilephone");
+                String homephone = rs.getString("homephone");
+                String homeaddress = rs.getString("homeaddress");
+                boolean adminboolean = rs.getBoolean("adminboolean");
+                String pw = rs.getString("pw");
+
+               
+                user.setName(name);
+                user.setMiddlename(middlename);
+                user.setSurname(surname);
+                user.setEmailAddress(email);
+                user.setMobilePhone(mobilephone);
+                user.setHomePhone(homephone);
+                user.setHomeAddress(homeaddress);
+                user.setAdmin(adminboolean);
+                user.setPassword(pw);
+
+                 toReturn = "welcome";
             } else {
                 toReturn = "error";
             }
