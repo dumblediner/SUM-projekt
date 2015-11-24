@@ -6,24 +6,22 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-/**
- *
- * @author Dumblediner
- */
 public class User {
 
     private boolean admin;
-    private ArrayList<String> expertises;
+    private HashMap<String, Integer> expertises;
+    private ArrayList<Shift> desiredShifts;
+    private ArrayList<Shift> assignedShifts;
     private String name;
     private String middlename;
     private String surname;
-
+    private String password;
     private String mobilePhone;
     private String homePhone;
     private String emailAddress;
     private String homeAddress;
-    private String password;
 
     public User(boolean admin, String name, String middlename, String surname, String mobilePhone, String homePhone, String emailAddress, String homeAddress, String password) {
         this.admin = admin;
@@ -41,7 +39,14 @@ public class User {
 
     }
 
-    //Simple getters and setters
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public boolean isAdmin() {
         return admin;
     }
@@ -50,12 +55,8 @@ public class User {
         this.admin = admin;
     }
 
-    public ArrayList<String> getExpertises() {
+    public HashMap<String, Integer> getExpertises() {
         return expertises;
-    }
-
-    public void setExpertises(ArrayList<String> expertises) {
-        this.expertises = expertises;
     }
 
     public String getName() {
@@ -114,16 +115,8 @@ public class User {
         this.homeAddress = homeAddress;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public ArrayList<Shift> getShifts() {
+        return new ArrayList<>(desiredShifts);
     }
 
 }
-
-//TODO overvej arraylist til styring af hvilke zoner og kompetencer en bruger har.
-//sæt en zone til altid at have en specifik indeksplads, så data kan lagres så nemt som muligt
-//f.eks. grøn = 0,1,2 afhængig af deres niveau.
