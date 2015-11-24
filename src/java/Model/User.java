@@ -37,6 +37,10 @@ public class User {
         this.password = password;
     }
 
+    public User() {
+
+    }
+
     //Simple getters and setters
     public boolean isAdmin() {
         return admin;
