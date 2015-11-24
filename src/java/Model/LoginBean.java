@@ -76,7 +76,6 @@ public class LoginBean implements Serializable {
                 boolean adminboolean = rs.getBoolean("adminboolean");
                 String pw = rs.getString("pw");
 
-               
                 user.setName(name);
                 user.setMiddlename(middlename);
                 user.setSurname(surname);
@@ -87,7 +86,11 @@ public class LoginBean implements Serializable {
                 user.setAdmin(adminboolean);
                 user.setPassword(pw);
 
-                 toReturn = "welcome";
+                if (user.isAdmin() == true) {
+                    toReturn = "adminWelcome";
+                } else  {
+                    toReturn = "welcome";
+                }
             } else {
                 toReturn = "error";
             }
