@@ -16,9 +16,9 @@ public class ConnectionToDB {
 
     public static Connection getConnection() {
         try {
-            String url = "jdbc:sqlserver://wislerBærbar\\SQLEXPRESS;databaseName=KHS";
+            String url = "jdbc:sqlserver://localhost\\MSSQLServer;databaseName=KHS";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection(url, "sa", "nik123");
+            Connection conn = DriverManager.getConnection(url, "sa", "Grise");
 
             return conn;
         } catch (Exception ex) {
