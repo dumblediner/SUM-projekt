@@ -9,6 +9,8 @@ import static Model.LoginBean.rs;
 import static Model.LoginBean.s;
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +30,6 @@ public class OpretVikarBean implements Serializable {
     private User user = new User();
     private Map<String, Integer> expertises = new HashMap();
     private String color;
-
     private String name;
     private String middlename;
     private String surname;
@@ -136,6 +137,23 @@ public class OpretVikarBean implements Serializable {
 
     public void setHomeAddress(String homeAddress) {
         this.homeAddress = homeAddress;
+    
+    }
+    public void initSettings() {
+        Connection conn = null;
+        try {
+            conn = ConnectionToDB.getConnection();
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM GLOBALSETTINGS");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                expertises.put(rs., Integer.SIZE)
+            }
+                   
+         } catch (SQLException e) {
+            System.out.println("Sql Exception :" + e.getMessage());
+        }
+            
+        
     }
 
     public void opretVikar() throws SQLException {
@@ -144,10 +162,10 @@ public class OpretVikarBean implements Serializable {
             conn = ConnectionToDB.getConnection();
             s = conn.prepareStatement(
                     "INSERT INTO users values(?, ? ,? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
-            s.setString(1, user.getExpertises().get(color) + "");
-            s.setString(2, user.getExpertises().get(color) + "");
-            s.setString(3, user.getExpertises().get(color) + "");
-            s.setString(4, user.getExpertises().get(color) + "");
+            s.setString(1, user.getExpertises().get("Orange")+"");
+            s.setString(2, user.getExpertises().get("Blue") + "");
+            s.setString(3, user.getExpertises().get("Green") + "");
+            s.setString(4, user.getExpertises().get("Red") + "");
             s.setString(5, user.getName());
             s.setString(6, user.getMiddlename());
             s.setString(7, user.getSurname());

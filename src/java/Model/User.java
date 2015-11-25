@@ -7,11 +7,12 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class User {
 
     private boolean admin;
-    private HashMap<String, Integer> expertises;
+    private Map<String, Integer> expertises;
     private ArrayList<Shift> desiredShifts;
     private ArrayList<Shift> assignedShifts;
     private String name;
@@ -55,7 +56,7 @@ public class User {
         this.admin = admin;
     }
 
-    public HashMap<String, Integer> getExpertises() {
+    public Map<String, Integer> getExpertises() {
         return expertises;
     }
 
@@ -117,6 +118,7 @@ public class User {
 
     public ArrayList<Shift> getShifts() {
         return new ArrayList<>(desiredShifts);
+    
     }
 
 }
