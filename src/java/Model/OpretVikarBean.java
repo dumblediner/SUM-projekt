@@ -37,7 +37,7 @@ public class OpretVikarBean implements Serializable {
     private String homePhone;
     private String emailAddress;
     private String homeAddress;
-    
+
     public User getUser() {
         return user;
     }
@@ -54,8 +54,12 @@ public class OpretVikarBean implements Serializable {
         this.color = color;
     }
 
-    public void setExpertises(Map<String, Integer> expertises) {
-        this.expertises = expertises;
+    public void setExpertises(String key, Integer level) {
+        expertises.put(key, level);
+    }
+    
+    public void insertExpertise(String s){
+        
     }
 
     public String getPassword() {

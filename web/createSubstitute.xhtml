@@ -24,7 +24,7 @@
                 </tr>
                 <tr>
                     <td>Indtast mellemnavn:</td>
-                    <td><h:inputSecret value="#{opretVikarBean.user.middlename}"/></td>
+                    <td><h:inputText value="#{opretVikarBean.user.middlename}"/></td>
                 </tr>
                 <tr>
                     <td>Indtast efternavn:</td>
@@ -36,7 +36,7 @@
                 </tr>
                 <tr>
                     <td>Indtast hjemmetelefonnummer:</td>
-                    <td><h:inputSecret value="#{opretVikarBean.user.homePhone}"/></td>
+                    <td><h:inputText value="#{opretVikarBean.user.homePhone}"/></td>
                 </tr>
                 <tr>
                     <td>Indtast E-mailadresse:</td>
@@ -48,7 +48,7 @@
                 </tr>
                 <tr>
                     <td>Skal være admin:</td>
-                    <td><h:inputSecret value="#{opretVikarBean.user.admin}"/></td>
+                    <td><h:inputText value="#{opretVikarBean.user.admin}"/></td>
                 </tr>
                 <tr>
                     <td>Indtast password</td>
@@ -56,23 +56,23 @@
                 </tr>
                 <tr>
                     <td>Er oplært i Orange zone</td>
-                    <td><h:inputText value="#{opretVikarBean.user.expertises}"/></td>
+                    <td><h:inputText value="#{opretVikarBean.user.expertises["orange"]}"/></td>
                 </tr>
                 <tr>
                     <td>Er oplært i Blå zone</td>
-                    <td><h:inputSecret value="#{opretVikarBean.user.expertises}"/></td>
+                    <td><h:inputText value="#{opretVikarBean.user.expertises[blue]}"/></td>
                 </tr>
                 <tr>
                     <td>Er oplært i Grøn zone</td>
-                    <td><h:inputText value="#{opretVikarBean.user.expertises}"/></td>
+                    <td><h:inputText value="#{opretVikarBean.user.expertises[green]}"/></td>
                 </tr>
                 <tr>
                     <td>Er oplært i Rød zone</td>
-                    <td><h:inputText value="#{opretVikarBean.user.expertises}"/></td>
+                    <td><h:inputText value="#{opretVikarBean.user.expertises[red]}"/></td>
                 </tr>
             </table>
 
-            <h:commandButton id="opretvikar" value="Opret vikar" class="logudknap">#{opretVikarBean.opretVikar}</h:commandButton>
+            <h:commandButton id="opretvikar" value="Opret vikar" class="logudknap" action="#{opretVikarBean.opretVikar}"></h:commandButton>
             <p><h:commandButton id="logud" value="Afbryd" action="adminWelcome" class="logudknap"></h:commandButton></p> 
 
 
