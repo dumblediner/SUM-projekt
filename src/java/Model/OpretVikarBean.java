@@ -189,12 +189,20 @@ public class OpretVikarBean implements Serializable {
             Statement sm = conn.createStatement();
             ResultSet rs = null;
             System.out.println("HEJ");
-            sm.executeQuery("SELECT name FROM users");
+            sm.executeQuery("SELECT name,middlename,surname,mobilephone,homephone,emailaddress,homeaddress,adminboolean FROM users");
             rs = sm.getResultSet();
             while (rs.next()) {
                 System.out.println("ConnecT?123");
                 User user = new User();
-                user.setName(rs.getString(name));
+                user.setName(rs.getString("name"));
+                user.setMiddlename(rs.getString("middlename"));
+                user.setSurname(rs.getString("surname"));
+                user.setMobilePhone(rs.getString("mobilephone"));
+                user.setHomePhone(rs.getString("homephone"));
+                user.setEmailAddress(rs.getString("emailaddress"));
+                user.setAdmin(rs.getBoolean("adminboolean"));
+                
+                
 //                vB.setMiddlename(rs.getString(middlename));
 //                vB.setSurname(rs.getString(surname));
 //                vB.setEmailAddress(rs.getString(emailAddress));

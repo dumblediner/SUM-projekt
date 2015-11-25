@@ -23,8 +23,29 @@
                 <h:outputLabel value="Mobil nummer:"/> #{loginBean.user.mobilePhone}
             </h:panelGrid>
             <h:dataTable var="list" value="#{opretVikarBean.getAllSubstitute()}">
-                         <h:column>
-                             <h:outputText value="#{list.name}"/>
+                <h:column>
+                    <h:outputText value="#{list.name}"/>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{list.middlename}"/>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{list.surname}"/>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{list.emailAddress}"/>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{list.mobilePhone}"/>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{list.homePhone}"/>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{list.homeAddress}"/>
+                </h:column>
+                <h:column>
+                <h:outputText value="#{list.admin}"/>
                 </h:column>
             </h:dataTable>
 
