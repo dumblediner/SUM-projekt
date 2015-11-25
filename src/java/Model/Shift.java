@@ -21,30 +21,21 @@ import java.util.Date;
  */
 public class Shift {
     private Date date;
-<<<<<<< HEAD
     private LocalTime startTime;
     private LocalTime endTime;
-=======
-    private double startTime;
-    private double endTime;
->>>>>>> origin/ROTTEGIT
     private String expertise; //Typen skal muligvis ændres
     private ArrayList<User> unassignedList;
     private User substitute;
     private int id;
    
-<<<<<<< HEAD
+
     public Shift(Date date, LocalTime startTime, LocalTime endTime, String zone, int id){
-=======
-    public Shift(Date date, double startTime, double endTime, String zone){
->>>>>>> origin/ROTTEGIT
-        this.date = date;
+     this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.expertise = zone;
         this.unassignedList = new ArrayList<>();
         this.id = id;
-        
     }
 
     public int getId() {
