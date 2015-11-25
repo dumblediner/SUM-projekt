@@ -10,7 +10,6 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
  
@@ -19,7 +18,8 @@ import java.util.ArrayList;
  * @author Mikkel
  */
 public class Shift {
-    private Date date;
+    private Date startDate;
+    private Date endDate;
     private LocalTime startTime;
     private LocalTime endTime;
     private String expertise; //Typen skal muligvis ændres
@@ -27,11 +27,12 @@ public class Shift {
     private User substitute;
     private int id;
    
-    public Shift(Date date, LocalTime startTime, LocalTime endTime, String zone, int id){
-        this.date = date;
+    public Shift(Date Startdate, Date Enddate, LocalTime startTime, LocalTime endTime, String expertise, int id){
+        this.startDate = Startdate;
+        this.endDate = Enddate;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.expertise = zone;
+        this.expertise = expertise;
         this.unassignedList = new ArrayList<>();
         this.id = id;
         
@@ -45,12 +46,20 @@ public class Shift {
         this.id = id;
     }
  
-    public Date getDate() {
-        return date;
+    public Date getStartDate() {
+        return Startdate;
     }
  
-    public void setDate(Date date) {
-        this.date = date;
+    public void setStartDate(Date date) {
+        this.Startdate = date;
+    }
+    
+       public Date getEndDate() {
+        return Enddate;
+    }
+ 
+    public void setEndDate(Date date) {
+        this.Enddate = date;
     }
  
     public LocalTime getStartTime() {

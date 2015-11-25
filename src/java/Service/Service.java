@@ -111,6 +111,16 @@ public class Service {
     }
    
     public void ConfirmShift(Shift shift, User user){
+        Connection conn = null;
+         try{
+            conn = ConnectionToDB.getConnection();
+            s = conn.createStatement();
+          shift.setSubstitute(user);
+          user.getShifts().add(shift);
+            
+         } catch(SQLException e){
+            System.out.println("SQL Exception" + e.getMessage());
+        }
         
     }
    
