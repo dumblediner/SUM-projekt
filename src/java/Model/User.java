@@ -7,6 +7,7 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class User {
 
@@ -57,6 +58,10 @@ public class User {
 
     public HashMap<String, Integer> getExpertises() {
         return expertises;
+    }
+    
+    public void setExpertises(HashMap<String, Integer> map) {
+        this.expertises = map;
     }
 
     public String getName() {

@@ -26,7 +26,19 @@ public class OpretVikarBean implements Serializable {
 
     private boolean admin;
     private User user = new User();
-    private Map<String, Integer> expertises = new HashMap();
+
+    
+    private Map<String,Integer> expertises = new HashMap<String, Integer>()
+{
+    {
+        put("red", 0);
+        put("blue", 0);
+        put("green", 0);
+        put("orange", 0);
+        user.setExpertises(this);
+    }
+};
+  
     private String color;
 
     private String name;
@@ -41,6 +53,14 @@ public class OpretVikarBean implements Serializable {
     public User getUser() {
         return user;
     }
+    
+    public void add(String key, Integer value) {
+        expertises.put(key, value);
+    }
+
+    public Integer getObject(String key) {
+        return expertises.get(key);
+    }
 
     public void setUser(User user) {
         this.user = user;
@@ -52,14 +72,6 @@ public class OpretVikarBean implements Serializable {
 
     public void setColor(String color) {
         this.color = color;
-    }
-
-    public void setExpertises(String key, Integer level) {
-        expertises.put(key, level);
-    }
-    
-    public void insertExpertise(String s){
-        
     }
 
     public String getPassword() {
@@ -76,10 +88,6 @@ public class OpretVikarBean implements Serializable {
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
-    }
-
-    public Map<String, Integer> getExpertises() {
-        return expertises;
     }
 
     public String getName() {
@@ -138,8 +146,9 @@ public class OpretVikarBean implements Serializable {
         this.homeAddress = homeAddress;
     }
 
-    public void opretVikar() throws SQLException {
+    public String opretVikar() throws SQLException {
         Connection conn = null;
+        String toReturn = null;
         try {
             conn = ConnectionToDB.getConnection();
             s = conn.prepareStatement(
@@ -162,5 +171,6 @@ public class OpretVikarBean implements Serializable {
         } catch (SQLException e) {
             System.out.println("Sql Exception :" + e.getMessage());
         }
+        return toReturn;
     }
 }
