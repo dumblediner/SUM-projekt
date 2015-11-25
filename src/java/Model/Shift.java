@@ -6,6 +6,7 @@
 package Model;
  
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
  * @author Mikkel
  */
 public class Shift {
-    private LocalDate date;
+    private Date date;
     private LocalTime startTime;
     private LocalTime endTime;
     private String expertise; //Typen skal muligvis ændres
@@ -26,7 +27,7 @@ public class Shift {
     private User substitute;
     private int id;
    
-    public Shift(LocalDate date, LocalTime startTime, LocalTime endTime, String zone, int id){
+    public Shift(Date date, LocalTime startTime, LocalTime endTime, String zone, int id){
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -44,11 +45,11 @@ public class Shift {
         this.id = id;
     }
  
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
  
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
  

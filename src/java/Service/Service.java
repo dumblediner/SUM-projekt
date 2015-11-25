@@ -4,11 +4,10 @@ import Model.ConnectionToDB;
 import Model.Shift;
 import Model.User;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import javax.enterprise.context.ApplicationScoped;
@@ -76,7 +75,7 @@ public class Service {
         return users;
     }
    
-   public static void createShift(LocalDate date, LocalTime startTime, LocalTime endTime, String zone){
+   public static void createShift(Date date, LocalTime startTime, LocalTime endTime, String zone){
      // Shift newShift = new Shift(date,startTime,endTime, zone);
       String getId = "SELECT id FROM shifts WHERE id=(SELECT max(id) FROM shifts)";
      
@@ -91,22 +90,28 @@ public class Service {
           id++;
         }
          String sql = "INSERT INTO shifts VALUES ('"+id+"','"+date+"','"+startTime+"','"+endTime+"','"+zone+"')";
-         s.execute(sql);
-             
-      
+         s.execute(sql);   
       }
-      catch (Exception e){
+      catch (SQLException e){
           System.out.println(e.getMessage());
       }
     
     }
    
     public void deleteShift(Shift shift){
-        //TODOO
+       try{
+           Connection conn = ConnectionToDB.getConnection();
+        Statement s = conn.createStatement();
+        s.execute("DELETE FROM usershifts WHERE shifts_shiftid=" + shift.getId());
+        s.execute("DELETE FROM freeshifts WHERE shiftid=" + shift.getId());
+        s.execute("DELETE FROM shifts WHERE shiftid=" + shift.getId());
+       } catch(SQLException e){
+           System.out.println(e.getMessage());
+       }
     }
    
-    public void AcceptShiftSwap(){
-        //TODOO - Admin skal acceptere bytning af vagter.
+    public void ConfirmShift(Shift shift, User user){
+        
     }
    
     public void RequestShift(Shift shift, User user){
