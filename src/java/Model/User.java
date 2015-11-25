@@ -5,11 +5,12 @@
  */
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class User {
+public class User implements Serializable {
 
     private boolean admin;
     private HashMap<String, Integer> expertises;
@@ -37,7 +38,7 @@ public class User {
     }
 
     public User() {
-
+        
     }
 
     public String getPassword() {

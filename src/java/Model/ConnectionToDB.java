@@ -32,6 +32,7 @@ public class ConnectionToDB {
         try {
             conn.close();
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
     }
 }

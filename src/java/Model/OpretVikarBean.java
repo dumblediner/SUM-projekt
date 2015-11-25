@@ -26,7 +26,6 @@ public class OpretVikarBean implements Serializable {
 
     private boolean admin;
     private User user = new User();
-
     
     private Map<String,Integer> expertises = new HashMap<String, Integer>()
 {
@@ -39,8 +38,6 @@ public class OpretVikarBean implements Serializable {
     }
 };
   
-    private String color;
-
     private String name;
     private String middlename;
     private String surname;
@@ -64,14 +61,6 @@ public class OpretVikarBean implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public String getPassword() {
@@ -153,10 +142,11 @@ public class OpretVikarBean implements Serializable {
             conn = ConnectionToDB.getConnection();
             s = conn.prepareStatement(
                     "INSERT INTO users values(?, ? ,? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
-            s.setString(1, user.getExpertises().get(color) + "");
-            s.setString(2, user.getExpertises().get(color) + "");
-            s.setString(3, user.getExpertises().get(color) + "");
-            s.setString(4, user.getExpertises().get(color) + "");
+            
+            s.setString(1, user.getExpertises().get("orange")+"");
+            s.setString(2, user.getExpertises().get("blue") + "");
+            s.setString(3, user.getExpertises().get("green") + "");
+            s.setString(4, user.getExpertises().get("red") + "");
             s.setString(5, user.getName());
             s.setString(6, user.getMiddlename());
             s.setString(7, user.getSurname());
@@ -166,6 +156,7 @@ public class OpretVikarBean implements Serializable {
             s.setString(11, user.getHomeAddress());
             s.setBoolean(12, isAdmin());
             s.setString(13, user.getPassword());
+            System.out.println(s + "bane?");
             s.executeQuery();
 
         } catch (SQLException e) {
