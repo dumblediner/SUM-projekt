@@ -18,7 +18,7 @@ public class ConnectionToDB {
         try {
             String url = "jdbc:sqlserver://wislerBærbar\\SQLEXPRESS;databaseName=KHS";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection(url, "sa", "nik123");
+            Connection conn = DriverManager.getConnection(url, "sa", "230893");
 
             return conn;
         } catch (Exception ex) {

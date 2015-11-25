@@ -1,7 +1,12 @@
 package Service;
  
+import Model.ConnectionToDB;
 import Model.Shift;
 import Model.User;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -15,6 +20,9 @@ public class Service {
    
     private final ArrayList<User> users;
     private final ArrayList<Shift> substituteList;
+    private Statement s;
+    private ResultSet rs;
+    private String str;
    
    
     public Service() {
@@ -68,8 +76,29 @@ public class Service {
         return users;
     }
    
-    public void createShift(LocalDate date, double startTime, double endTime, String zone){
-       //TODOO - mulig return statement
+   public static void createShift(LocalDate date, LocalTime startTime, LocalTime endTime, String zone){
+     // Shift newShift = new Shift(date,startTime,endTime, zone);
+      String getId = "SELECT id FROM shifts WHERE id=(SELECT max(id) FROM shifts)";
+     
+      try{
+          int id = 0;
+         Connection conn = ConnectionToDB.getConnection();
+        Statement s = conn.createStatement();
+         s.executeQuery(getId);
+        ResultSet rs = s.getResultSet();
+        while(rs.next()){
+          id = rs.getInt("id");
+          id++;
+        }
+         String sql = "INSERT INTO shifts VALUES ('"+id+"','"+date+"','"+startTime+"','"+endTime+"','"+zone+"')";
+         s.execute(sql);
+             
+      
+      }
+      catch (Exception e){
+          System.out.println(e.getMessage());
+      }
+    
     }
    
     public void deleteShift(Shift shift){
@@ -81,19 +110,25 @@ public class Service {
     }
    
     public void RequestShift(Shift shift, User user){
+        Connection conn = null;
+        
+        try{
+            conn = ConnectionToDB.getConnection();
+            s = conn.createStatement();
       if(shift.getSubstitute() == null)
       {
          
-          if(shift.getExpertise().equals("red"))
+          if(user.getExpertises().containsKey(shift.getExpertise()))
           {
-              if(shift.getLevel() <= user.getExpertises().get(0))
+              if(user.getExpertises().get(shift.getExpertise()) > 0)
               {
-                 
+                  s.execute("INSERT INTO usershifts VALUES('" + user.getMobilePhone() + "','" + shift.getId() + "')");
+                  shift.getSubstitutes().add(user);
               }
-          }
-         
-          shift.getSubstitutes().add(user);
+          } 
       }
-    }
+        } catch(SQLException e){
+            System.out.println("SQL Exception" + e.getMessage());
+        }
  
 }

@@ -59,7 +59,7 @@ public class User {
     }
  
     public void setLevel(String expertise, Integer level) {
-        this.expertises.get(expertise). = level;
+        this.expertises.put(expertise, level);
     }
    
  

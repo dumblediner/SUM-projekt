@@ -5,7 +5,12 @@
  */
 package Model;
  
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
  
 /**
@@ -14,28 +19,29 @@ import java.util.ArrayList;
  */
 public class Shift {
     private LocalDate date;
-    private double startTime;
-    private double endTime;
+    private LocalTime startTime;
+    private LocalTime endTime;
     private String expertise; //Typen skal muligvis ændres
-    private int level; // Ekspertise niveau der er krævet
     private ArrayList<User> unassignedList;
     private User substitute;
+    private int id;
    
-    public Shift(LocalDate date, double startTime, double endTime, String zone){
+    public Shift(LocalDate date, LocalTime startTime, LocalTime endTime, String zone, int id){
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.expertise = zone;
         this.unassignedList = new ArrayList<>();
+        this.id = id;
+        
     }
-   
-   
-     public int getLevel() {
-        return level;
+
+    public int getId() {
+        return id;
     }
- 
-    public void setLevel(int level) {
-        this.level = level;
+
+    public void setId(int id) {
+        this.id = id;
     }
  
     public LocalDate getDate() {
@@ -46,19 +52,19 @@ public class Shift {
         this.date = date;
     }
  
-    public double getStartTime() {
+    public LocalTime getStartTime() {
         return startTime;
     }
  
-    public void setStartTime(double startTime) {
+    public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
     }
  
-    public double getEndTime() {
+    public LocalTime getEndTime() {
         return endTime;
     }
  
-    public void setEndTime(double endTime) {
+    public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
     }
  
@@ -79,7 +85,33 @@ public class Shift {
     }
    
     public ArrayList<User> getSubstitutes(){
-        return new ArrayList<>(unassignedList);
+        try{
+        Connection conn = ConnectionToDB.getConnection();
+        Statement s = conn.createStatement();
+        s.executeQuery("SELECT user_mobilephone FROM usershifts WHERE id=" + this.getId());
+        ResultSet rs = s.getResultSet();
+        while(rs.next()){
+           String mobile = rs.getString("user_mobilephone");
+            s.executeQuery("SELECT * FROM user WHERE mobilephone=" + mobile);
+            while(rs.next()){
+                boolean admin = rs.getBoolean("adminboolean");
+                String name = rs.getString("name");
+                String middlename = rs.getString("middlename");
+                String lastname = rs.getString("lastname");
+                String mobilephone = rs.getString("mobilephone");
+                String homephone = rs.getString("homephone");
+                String emailaddress = rs.getString("emailaddress");
+                String homeaddress = rs.getString("homeaddress");
+                String pw = rs.getString("pw");
+                
+                User user = new User(admin, name, middlename, lastname, mobilephone, homephone, emailaddress, homeaddress, pw);
+                unassignedList.add(user);
+            }
+        }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return unassignedList;
     }
    
 }
