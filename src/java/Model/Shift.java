@@ -7,13 +7,14 @@ package Model;
  
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
  
 /**
  *
  * @author Mikkel
  */
 public class Shift {
-    private LocalDate date;
+    private Date date;
     private double startTime;
     private double endTime;
     private String expertise; //Typen skal muligvis ændres
@@ -21,7 +22,7 @@ public class Shift {
     private ArrayList<User> unassignedList;
     private User substitute;
    
-    public Shift(LocalDate date, double startTime, double endTime, String zone){
+    public Shift(Date date, double startTime, double endTime, String zone){
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -38,11 +39,11 @@ public class Shift {
         this.level = level;
     }
  
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
  
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
  

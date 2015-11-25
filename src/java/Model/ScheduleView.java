@@ -45,6 +45,8 @@ public class ScheduleView implements Serializable {
         colors.add("grøn");
         colors.add("blå");
         colors.add("orange");
+        
+       
         eventModel = new DefaultScheduleModel();
         eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay11Pm()));
         eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));
@@ -183,6 +185,7 @@ public class ScheduleView implements Serializable {
             LocalTime endDateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalTime();
             String title = event.getTitle();
             String zone = getChosenZone();
+            
            
             Service.createShift(d1,startDateTime,endDateTime,zone);
            
