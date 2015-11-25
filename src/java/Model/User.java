@@ -63,6 +63,9 @@ public class User implements Serializable {
     
     public void setExpertises(HashMap<String, Integer> map) {
         this.expertises = map;
+ 
+    public void setLevel(String expertise, Integer level) {
+        this.expertises.put(expertise, level);
     }
 
     public String getName() {
@@ -125,4 +128,13 @@ public class User implements Serializable {
         return new ArrayList<>(desiredShifts);
     }
 
+}
+   
+    public ArrayList<Shift> getDesiredShifts(){
+        return new ArrayList<>(desiredShifts);
+    }
+    
+    public ArrayList<Shift> getAssignedShifts(){
+        return new ArrayList<>(assignedShifts);
+    }
 }
