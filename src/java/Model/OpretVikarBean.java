@@ -9,6 +9,8 @@ import static Model.LoginBean.rs;
 import static Model.LoginBean.s;
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +40,7 @@ public class OpretVikarBean implements Serializable {
     }
 };
   
+    private Map<String, Integer> expertises = new HashMap();
     private String name;
     private String middlename;
     private String surname;
@@ -133,6 +136,23 @@ public class OpretVikarBean implements Serializable {
 
     public void setHomeAddress(String homeAddress) {
         this.homeAddress = homeAddress;
+    
+    }
+    public void initSettings() {
+        Connection conn = null;
+        try {
+            conn = ConnectionToDB.getConnection();
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM GLOBALSETTINGS");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                expertises.put(rs., Integer.SIZE)
+            }
+                   
+         } catch (SQLException e) {
+            System.out.println("Sql Exception :" + e.getMessage());
+        }
+            
+        
     }
 
     public String opretVikar() throws SQLException {
