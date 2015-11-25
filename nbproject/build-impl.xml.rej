@@ -1,0 +1,9 @@
+diff a/nbproject/build-impl.xml b/nbproject/build-impl.xml	(rejected hunks)
+@@ -4339,6 +4339,7 @@
+     <target depends="clean" description="Clean build products." name="clean-ear"/>
+ </project>
+ >>>>>>> origin/BranchBallMick
++=======
+ <?xml version="1.0" encoding="UTF-8"?>
+ <!--
+         *** GENERATED FROM project.xml - DO NOT EDIT  ***

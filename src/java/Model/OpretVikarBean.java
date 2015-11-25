@@ -12,9 +12,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -155,6 +158,16 @@ public class OpretVikarBean implements Serializable {
         
     }
 
+    public Map<String, Integer> getExpertises() {
+        return expertises;
+    }
+
+    public void setExpertises(Map<String, Integer> expertises) {
+        this.expertises = expertises;
+    }
+    
+    
+
     public String opretVikar() throws SQLException {
         Connection conn = null;
         String toReturn = null;
@@ -184,4 +197,35 @@ public class OpretVikarBean implements Serializable {
         }
         return toReturn;
     }
+    
+    //Hent alle Users
+        public ArrayList<User> getAllSubstitute() throws SQLException {
+        ArrayList<User> arr = new ArrayList<User>();
+               
+        try {
+            Connection conn= ConnectionToDB.getConnection();
+            Statement sm = conn.createStatement();
+            ResultSet rs = null;
+            System.out.println("HEJ");
+            sm.executeQuery("SELECT name FROM users");
+            rs = sm.getResultSet();
+            while (rs.next()) {
+                System.out.println("ConnecT?123");
+                User user = new User();
+                user.setName(rs.getString(name));
+//                vB.setMiddlename(rs.getString(middlename));
+//                vB.setSurname(rs.getString(surname));
+//                vB.setEmailAddress(rs.getString(emailAddress));
+//                vB.setMobilePhone(rs.getString(mobilePhone));
+                //Add to List
+                arr.add(user);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OpretVikarBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arr;
+        }
+       
+
+    
 }

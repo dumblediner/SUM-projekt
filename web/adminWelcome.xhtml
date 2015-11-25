@@ -21,8 +21,12 @@
                 <h:outputLabel value="Efternavn:"/> #{loginBean.user.surname} <br></br>
                 <h:outputLabel value="E-mailaddresse:"/> #{loginBean.user.emailAddress}
                 <h:outputLabel value="Mobil nummer:"/> #{loginBean.user.mobilePhone}
-
             </h:panelGrid>
+            <h:dataTable var="list" value="#{opretVikarBean.getAllSubstitute()}">
+                         <h:column>
+                             <h:outputText value="#{list.name}"/>
+                </h:column>
+            </h:dataTable>
 
 
 
