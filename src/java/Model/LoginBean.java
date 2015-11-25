@@ -88,7 +88,7 @@ public class LoginBean implements Serializable {
 
                 if (user.isAdmin() == true) {
                     toReturn = "adminWelcome";
-                } else  {
+                } else {
                     toReturn = "welcome";
                 }
             } else {
@@ -101,3 +101,22 @@ public class LoginBean implements Serializable {
         return toReturn;
     }
 }
+
+//    public void opretVikar() {
+//        Connection conn = null;
+//        String toReturn = "";
+//        try {
+//            conn = ConnectionToDB.getConnection();
+//            s = conn.prepareStatement("SELECT * FROM users WHERE emailaddress = ? AND pw =?");
+//            s.setString(1, user.getEmailAddress());
+//            s.setString(2, user.getPassword());
+////            s.executeQuery("SELECT * FROM users WHERE emailaddress = " + "'" + user.getEmailAddress() + "'" + " AND pw =" + "'" + user.getPassword() + "'");
+//            rs = s.executeQuery();
+//            if (rs.next()) {
+//            }
+//
+//        } catch (SQLException e) {
+//            System.out.println("Sql Exception :" + e.getMessage());
+//        }
+//        return toReturn;
+//    }
