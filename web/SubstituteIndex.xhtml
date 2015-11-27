@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+       <script src="Javascript.js"></script>
+       <title>Skema</title>
+       <h:outputStylesheet library="css" name="panelgrid.css"></h:outputStylesheet>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:growl id="messages" showDetail="true" />
+    <h:panelGrid id="panelgridSchedule" columnClasses="value" style="margin: 0 auto; width:75%;" styleClass="panelGridCenter">
+        <h3 style="margin-top: 0">Substitute Schedule</h3>
+        <p:schedule id="schedule" value="#{SubstituteSchedule.eventModel}" widgetVar="myschedule" timeZone="GMT+1">
+ <!-- ændre tilbage til dateDetails og eventSubstituteDialogdateSelect -->
+            <p:ajax event="eventSelect" listener="#{SubstituteSchedule.onEventSelect}" update="eventDetails" oncomplete="PF('eventSubstituteDialogEventSelect').show();" />
+            <p:ajax event="eventMove" listener="#{SubstituteSchedule.onEventMove}" update="messages" />
+            <p:ajax event="eventResize" listener="#{SubstituteSchedule.onEventResize}" update="messages" />
+ 
+        </p:schedule>
+    </h:panelGrid>
+            
+    <p:dialog widgetVar="eventSubstituteDialogEventSelect" header="Event Details" showEffect="clip" hideEffect="clip">
+        <h:panelGrid id="eventDetails" columns="2">
+            
+            <p:outputLabel for ="startDato" value="Start Dato:"/>
+            <p:inputText id="startDato" value="#{SubstituteSchedule.getEvent().data.startDate}" disabled="true"/>
+            <p:outputLabel for="slutDato" value="Slut Dato:"/>
+            <p:inputText id="slutDato" value="#{SubstituteSchedule.getEvent().data.endDate}" disabled="true"/>
+            <p:outputLabel for ="startTime" value="Start tid:"/>
+            <p:inputText id="startTime" value="#{SubstituteSchedule.getEvent().data.startTime}" disabled="true"/>
+            <p:outputLabel for ="slutTime" value="Slut tid:"/>
+            <p:inputText id="slutTime" value="#{SubstituteSchedule.getEvent().data.endTime}" disabled="true"/>
+            <p:outputLabel for="chosenZone" value="Zone:"/>
+            <p:inputText id="chosenZone" value="#{SubstituteSchedule.getEvent().data.expertise}" disabled="true"/>
+            
+            
+            <p:commandButton id="tilmeldVagt" value="Tilmeld" actionListener="#{SubstituteSchedule.tilmeldVagt()}" oncomplete="PF('myschedule').update();PF('eventSubstituteDialog').hide();"/>
+        </h:panelGrid>
+    </p:dialog>
+                
+        </h:form>
+    </h:body>
+</html>

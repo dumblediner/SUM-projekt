@@ -7,10 +7,8 @@ package Model;
 
 import java.io.Serializable;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.PreparedStatement;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -96,7 +94,7 @@ public class LoginBean implements Serializable {
             }
 
         } catch (SQLException e) {
-            System.out.println("Sql Exception :" + e.getMessage());
+            System.out.println("Sql Exception  :" + e.getMessage());
         }
         return toReturn;
     }

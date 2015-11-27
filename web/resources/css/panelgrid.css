@@ -1,0 +1,28 @@
+.yellow .fc-event,
+.yellow a,
+.yellow .fc-event-inner{
+   background-color: yellow;
+   border-color: yellow;
+   color: black;
+}
+.orange .fc-event,
+.orange a,
+.orange .fc-event-inner{
+   background-color: orange;
+   border-color: orange;
+   color: black;
+}
+.green .fc-event,
+.green a,
+.green .fc-event-inner{
+   background-color: green;
+   border-color: green;
+   color: white;
+}
+.blue .fc-event,
+.blue a,
+.blue .fc-event-inner{
+   background-color: blue;
+   border-color: blue;
+   color: white;
+}

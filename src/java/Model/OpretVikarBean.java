@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import org.primefaces.event.FlowEvent;
 
 /**
  *
@@ -30,7 +31,18 @@ import javax.faces.bean.SessionScoped;
 public class OpretVikarBean implements Serializable {
 
     private boolean admin;
+    private boolean skip;
     private User user = new User();
+    
+    private ArrayList<Integer> allowedZoneLevels = new ArrayList<Integer>(){
+    {
+        this.add(0);
+        this.add(1);
+        this.add(2);
+    }
+};
+
+    
     
     private Map<String,Integer> expertises = new HashMap<String, Integer>()
 {
@@ -42,8 +54,6 @@ public class OpretVikarBean implements Serializable {
         user.setExpertises(this);
     }
 };
-  
-    private Map<String, Integer> expertises = new HashMap();
     private String name;
     private String middlename;
     private String surname;
@@ -52,6 +62,8 @@ public class OpretVikarBean implements Serializable {
     private String homePhone;
     private String emailAddress;
     private String homeAddress;
+    
+ 
 
     public User getUser() {
         return user;
@@ -77,8 +89,10 @@ public class OpretVikarBean implements Serializable {
         this.password = password;
     }
 
-    public boolean isAdmin() {
-        return admin;
+    public int isAdmin() {
+        if (admin)
+            return 1;
+        else return 0;
     }
 
     public void setAdmin(boolean admin) {
@@ -141,22 +155,6 @@ public class OpretVikarBean implements Serializable {
         this.homeAddress = homeAddress;
     
     }
-    public void initSettings() {
-        Connection conn = null;
-        try {
-            conn = ConnectionToDB.getConnection();
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM GLOBALSETTINGS");
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()) {
-                expertises.put(rs., Integer.SIZE)
-            }
-                   
-         } catch (SQLException e) {
-            System.out.println("Sql Exception :" + e.getMessage());
-        }
-            
-        
-    }
 
     public Map<String, Integer> getExpertises() {
         return expertises;
@@ -166,8 +164,6 @@ public class OpretVikarBean implements Serializable {
         this.expertises = expertises;
     }
     
-    
-
     public String opretVikar() throws SQLException {
         Connection conn = null;
         String toReturn = null;
@@ -187,7 +183,7 @@ public class OpretVikarBean implements Serializable {
             s.setString(9, user.getHomePhone());
             s.setString(10, user.getEmailAddress());
             s.setString(11, user.getHomeAddress());
-            s.setBoolean(12, isAdmin());
+            s.setString(12, Integer.toBinaryString(isAdmin()));
             s.setString(13, user.getPassword());
             System.out.println(s + "bane?");
             s.executeQuery();
@@ -199,7 +195,7 @@ public class OpretVikarBean implements Serializable {
     }
     
     //Hent alle Users
-        public ArrayList<User> getAllSubstitute() throws SQLException {
+    public ArrayList<User> getAllSubstitute() throws SQLException {
         ArrayList<User> arr = new ArrayList<User>();
                
         try {
@@ -226,6 +222,30 @@ public class OpretVikarBean implements Serializable {
         return arr;
         }
        
+    public String onFlowProcess(FlowEvent event) {
+        if(skip) {
+            skip = false;   //reset in case user goes back
+            return "confirm";
+        }
+        else {
+            return event.getNewStep();
+        }
+    }
+    
+     public boolean isSkip() {
+        return skip;
+    }
+     
+    public void setSkip(boolean skip) {
+        this.skip = skip;
+    }
 
+    public ArrayList<Integer> getAllowedZoneLevels() {
+        return allowedZoneLevels;
+    }
+
+    public void setAllowedZoneLevels(ArrayList<Integer> allowedZoneLevels) {
+        this.allowedZoneLevels = allowedZoneLevels;
+    }
     
 }

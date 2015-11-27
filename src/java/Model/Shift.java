@@ -10,72 +10,81 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
  
 /**
  *
  * @author Mikkel
  */
 public class Shift {
-    private Date date;
-<<<<<<< HEAD
-    private LocalTime startTime;
-    private LocalTime endTime;
-=======
-    private double startTime;
-    private double endTime;
->>>>>>> origin/ROTTEGIT
+    private Date startDate;
+    private Date endDate;
+    private Time startTime;
+    private Time endTime;
     private String expertise; //Typen skal muligvis ændres
     private ArrayList<User> unassignedList;
     private User substitute;
     private int id;
-   
-<<<<<<< HEAD
-    public Shift(Date date, LocalTime startTime, LocalTime endTime, String zone, int id){
-=======
-    public Shift(Date date, double startTime, double endTime, String zone){
->>>>>>> origin/ROTTEGIT
-        this.date = date;
+
+    public Shift(Date startDate,Date endDate, Time startTime, Time endTime, String zone, int id){
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.startTime = startTime;
         this.endTime = endTime;
         this.expertise = zone;
         this.unassignedList = new ArrayList<>();
         this.id = id;
-        
     }
 
     public int getId() {
         return id;
     }
 
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
  
-    public Date getDate() {
-        return date;
+    public Date getstartDate() {
+        return startDate;
     }
  
-    public void setDate(Date date) {
-        this.date = date;
+    public void setstartDate(Date date) {
+        this.startDate = date;
     }
  
-    public LocalTime getStartTime() {
+    
+    public Time getStartTime() {
         return startTime;
     }
  
-    public void setStartTime(LocalTime startTime) {
+    public void setStartTime(Time startTime) {
         this.startTime = startTime;
     }
  
-    public LocalTime getEndTime() {
+    public Time getEndTime() {
         return endTime;
     }
  
-    public void setEndTime(LocalTime endTime) {
+    public void setEndTime(Time endTime) {
         this.endTime = endTime;
     }
  

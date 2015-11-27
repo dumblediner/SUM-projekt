@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+       <script src="Javascript.js"></script>
+       <title>Admin Skema</title>
+       <h:outputStylesheet library="css" name="panelgrid.css"></h:outputStylesheet>
+    </h:head>
+    <h:body>  
+        <h:form>
+            <p:growl id="messages" showDetail="true" />
+    <h:panelGrid id="panelgridSchedule" columnClasses="value" style="margin: 0 auto; width:75%;" styleClass="panelGridCenter">
+        <h3 style="margin-top: 0">Editable Schedule</h3>
+        <p:schedule id="schedule" value="#{adminSchedule.eventModel}" widgetVar="myschedule" timeZone="GMT+1">
+ 
+            <p:ajax event="dateSelect" listener="#{adminSchedule.onDateSelect}" update="eventDetails" oncomplete="PF('eventAdminDialog').show();" />
+            <p:ajax event="eventSelect" listener="#{adminSchedule.onEventSelect}" update="eventDetails" oncomplete="PF('eventAdminDialog').show();" />
+            <p:ajax event="eventMove" listener="#{adminSchedule.onEventMove}" update="messages" />
+            <p:ajax event="eventResize" listener="#{adminSchedule.onEventResize}" update="messages" />
+ 
+        </p:schedule>
+    </h:panelGrid>
+ 
+    <p:dialog widgetVar="eventAdminDialog" header="Event Details" showEffect="clip" hideEffect="clip">
+        <h:panelGrid id="eventDetails" columns="2">
+            <p:outputLabel for="title" value="Title:" />
+            <p:inputText id="title" value="#{adminSchedule.event.title}" required="true" />
+ 
+            <p:outputLabel for="from" value="From:" />
+            <p:calendar id="from" value="#{adminSchedule.event.startDate}" timeZone="GMT+1" pattern="dd/MM/yyyy HH:mm"/>
+ 
+            <p:outputLabel for="to" value="To:" />
+            <p:calendar id="to" value="#{adminSchedule.event.endDate}" timeZone="GMT+1" pattern="dd/MM/yyyy HH:mm"/>
+  
+            <select id="dropdropselect">
+                <option value="Vælg Option:" selected="selected">Vælg Option:</option>
+                <option value="gul">Gul</option>
+                <option value="grøn">Grøn</option>
+                <option value="blå">Blå</option>
+                <option value="orange">Orange</option>
+            </select>
+            <p:commandButton id="resetButton" onclick="resetDropDownMenu();" type="reset" value="Reset"/> 
+            <!--Reset møgsvin fungere ikke, kom tilbage til det.-->
+            <p:commandButton id="addButton" value="Save" actionListener="#{adminSchedule.addEvent}" oncomplete="PF('myschedule').update();PF('eventAdminDialog').hide();" />
+        </h:panelGrid>
+    </p:dialog> 
+        </h:form>
+    </h:body>
+    
+</html>
