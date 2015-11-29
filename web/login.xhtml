@@ -7,8 +7,7 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-        <title></title> 
-
+        <title>Bane?</title> 
         <h:outputStylesheet library="css" name="login.css"/>
     </h:head>
 
@@ -26,10 +25,8 @@
                     <tr>
                         <td><h:inputText  value="#{loginBean.user.emailAddress}"   id="emailaddress" >
                                 <f:passThroughAttribute name="placeholder" value="E-mailadresse"/>
-                            </h:inputText></td>
-                        
-                        
-
+                            </h:inputText>
+                        </td>
                     </tr>
                     <tr>
                         <td><font size="5" color="darkblue">Password</font></td>
@@ -37,14 +34,11 @@
                     <tr>
                         <td><h:inputSecret  value="#{loginBean.user.password}" id="password">
                                 <f:passThroughAttribute name="placeholder" value="Password"/>
-                            </h:inputSecret></td>
+                            </h:inputSecret>
+                        </td>
                     </tr>
                 </table>                
-                <p><p:commandButton id="logindP" value="Login" action="#{loginBean.loginCheck}">
-                </p:commandButton></p>
-                
-                
-                
+                <h:commandButton id="opretvikar" value="Log ind" class="ui-widget" action="#{loginBean.loginCheck}"></h:commandButton> 
             </h:form>
         </f:view>
     </h:body>

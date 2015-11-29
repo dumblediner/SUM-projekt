@@ -3,7 +3,8 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>KHS Admin login side</title>
         <h:outputStylesheet library="css" name="welcome.css"/>
@@ -12,7 +13,23 @@
         <script src="javascriptToggle.js"></script>
     </h:head>
     <h:body> 
-        <h:form>
+        <h:form class="ui-widget">
+            <p:tabMenu activeIndex="#{param.i}">
+                <p:menuitem value="Overview" outcome="adminWelcome" icon="ui-icon-star">
+                    <f:param name="i" value="0" />
+                </p:menuitem>
+                <p:menuitem value="Opret vikar" outcome="createSubstitute" icon="ui-icon-star">
+                    <f:param name="i" value="1" />
+                </p:menuitem>
+                
+                <p:menuitem value="Kalender" outcome="SubstituteIndex" icon="ui-icon-calendar">
+                    <f:param name="i" value="2" />
+                </p:menuitem>
+                
+                <p:menuitem value="Log ud" action="#{loginBean.logout}" icon="ui-icon-cancel">
+                    <f:param name="i" value="3" />
+                </p:menuitem>
+            </p:tabMenu>
             <h3>Logget ind(ADMIN) som: #{loginBean.user.emailAddress}</h3>
 
             <h:panelGrid columns="2">
@@ -27,14 +44,7 @@
                              <h:outputText value="#{list.name}"/>
                 </h:column>
             </h:dataTable>
-
-
-
-            <p><h:commandButton id="logud" value="Log ud" action="login" class="logudknap"></h:commandButton></p> 
-            <h:commandButton id="opretvikar" value="Opret vikar" class="logudknap" action="createSubstitute"></h:commandButton>
-
-
-
+            <p><h:commandButton id="logudBtn" value="Log ud" action="login" class="ui-widget" ></h:commandButton></p> 
         </h:form>
     </h:body>
 </html>
