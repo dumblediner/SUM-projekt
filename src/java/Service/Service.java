@@ -124,7 +124,6 @@ public class Service {
         }
        
     }
-    
    
     public void RequestShift(Shift shift, User user){
         Connection conn = null;
