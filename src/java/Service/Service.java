@@ -39,7 +39,7 @@ public class Service {
 //       
 //        users.add(u1);
 //        users.add(u2);
-    }
+    
    
     private User getUser(User user) {
         User u = null;
@@ -75,7 +75,7 @@ public class Service {
         return users;
     }
    
-   public static void createShift(Date date, LocalTime startTime, LocalTime endTime, String zone){
+   public static Shift createShift(Date startDate, Date endDate, LocalTime startTime, LocalTime endTime, String zone){
      // Shift newShift = new Shift(date,startTime,endTime, zone);
       String getId = "SELECT id FROM shifts WHERE id=(SELECT max(id) FROM shifts)";
      
@@ -89,13 +89,14 @@ public class Service {
           id = rs.getInt("id");
           id++;
         }
-         String sql = "INSERT INTO shifts VALUES ('"+id+"','"+date+"','"+startTime+"','"+endTime+"','"+zone+"')";
+         String sql = "INSERT INTO shifts VALUES ('"+id+"','"+startDate+"','" +endDate+"','"+startTime+"','"+endTime+"','"+zone+"')";
          s.execute(sql);   
       }
       catch (SQLException e){
           System.out.println(e.getMessage());
       }
-    
+   Shift shift = new Shift(startDate, endDate, startTime, endTime, zone);
+   return shift;
     }
    
     public void deleteShift(Shift shift){
