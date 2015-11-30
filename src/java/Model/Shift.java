@@ -47,7 +47,7 @@ public class Shift {
     }
  
     public Date getStartDate() {
-        return Startdate;
+        return startDate;
     }
  
     public void setStartDate(Date date) {
