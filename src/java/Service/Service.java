@@ -25,20 +25,20 @@ public class Service {
    
    
     public Service() {
-        users = new ArrayList<>();
-        User u1 = new User();
-        User u2 = new User();
-       
-        u1.setUsername("abc");
-        u1.setPassword("123");
-        u1.setAdmin(true);
-       
-        u2.setUsername("def");
-        u2.setPassword("456");
-        u2.setAdmin(false);
-       
-        users.add(u1);
-        users.add(u2);
+//        users = new ArrayList<>();
+//        User u1 = new User();
+//        User u2 = new User();
+//       
+//        u1.setUsername("abc");
+//        u1.setPassword("123");
+//        u1.setAdmin(true);
+//       
+//        u2.setUsername("def");
+//        u2.setPassword("456");
+//        u2.setAdmin(false);
+//       
+//        users.add(u1);
+//        users.add(u2);
     }
    
     private User getUser(User user) {
@@ -104,7 +104,6 @@ public class Service {
            Connection conn = ConnectionToDB.getConnection();
         Statement s = conn.createStatement();
         s.execute("DELETE FROM usershifts WHERE shifts_shiftid=" + shift.getId());
-        s.execute("DELETE FROM freeshifts WHERE shiftid=" + shift.getId());
         s.execute("DELETE FROM shifts WHERE shiftid=" + shift.getId());
        } catch(SQLException e){
            System.out.println(e.getMessage());
@@ -117,13 +116,16 @@ public class Service {
             conn = ConnectionToDB.getConnection();
             s = conn.createStatement();
           shift.setSubstitute(user);
-          user.getShifts().add(shift);
-            
+          s.execute("DELETE FROM usershifts WHERE shifts_shiftid=" + shift.getId());
+          s.execute("UPDATE shifts SET user_mobilephone=" + user.getMobilePhone() + "WHERE shiftid=" + shift.getId() + ";");
+          user.getAssignedShifts().add(shift);
+           
          } catch(SQLException e){
             System.out.println("SQL Exception" + e.getMessage());
         }
-        
+       
     }
+    
    
     public void RequestShift(Shift shift, User user){
         Connection conn = null;
@@ -146,5 +148,8 @@ public class Service {
         } catch(SQLException e){
             System.out.println("SQL Exception" + e.getMessage());
         }
+    }
+    
+   
  
 }

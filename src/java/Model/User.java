@@ -119,8 +119,12 @@ public class User {
         this.homeAddress = homeAddress;
     }
    
-    public ArrayList<Shift> getShifts(){
+    public ArrayList<Shift> getDesiredShifts(){
         return new ArrayList<>(desiredShifts);
+    }
+    
+    public ArrayList<Shift> getAssignedShifts(){
+        return new ArrayList<>(assignedShifts);
     }
    
    
