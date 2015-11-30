@@ -102,7 +102,7 @@ public class Shift {
         ResultSet rs = s.getResultSet();
         while(rs.next()){
            String mobile = rs.getString("user_mobilephone");
-            s.executeQuery("SELECT * FROM user WHERE mobilephone=" + mobile);
+            s.executeQuery("SELECT * FROM users WHERE mobilephone=" + mobile);
             while(rs.next()){
                 boolean admin = rs.getBoolean("adminboolean");
                 String name = rs.getString("name");
