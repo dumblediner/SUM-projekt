@@ -27,14 +27,14 @@ public class Shift {
     private User substitute;
     private int id;
    
-    public Shift(Date Startdate, Date Enddate, LocalTime startTime, LocalTime endTime, String expertise, int id){
+    public Shift(Date Startdate, Date Enddate, LocalTime startTime, LocalTime endTime, String expertise){
         this.startDate = Startdate;
         this.endDate = Enddate;
         this.startTime = startTime;
         this.endTime = endTime;
         this.expertise = expertise;
         this.unassignedList = new ArrayList<>();
-        this.id = id;
+        
         
     }
 
@@ -51,15 +51,15 @@ public class Shift {
     }
  
     public void setStartDate(Date date) {
-        this.Startdate = date;
+        this.startDate = date;
     }
     
        public Date getEndDate() {
-        return Enddate;
+        return endDate;
     }
  
     public void setEndDate(Date date) {
-        this.Enddate = date;
+        this.endDate = date;
     }
  
     public LocalTime getStartTime() {
