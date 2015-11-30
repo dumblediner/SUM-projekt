@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>KHS Admin login side</title>
+        <h:outputStylesheet library="css" name="welcome.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+        </script>
+        <script src="javascriptToggle.js"></script>
+    </h:head>
+    <h:body> 
+        <h:form>
+            <p:tabMenu activeIndex="#{param.i}">
+                <p:menuitem value="Overview" outcome="adminWelcome" icon="ui-icon-star">
+                    <f:param name="i" value="0" />
+                </p:menuitem>
+                <p:menuitem value="Administrer vikarer" outcome="createSubstitute" icon="ui-icon-star">
+                    <f:param name="i" value="1" />
+                </p:menuitem>
+                
+                <p:menuitem value="Kalender" outcome="SubstituteIndex" icon="ui-icon-calendar">
+                    <f:param name="i" value="2" />
+                </p:menuitem>
+                
+                <p:menuitem value="Log ud" outcome="login" icon="ui-icon-cancel">
+                    <f:param name="i" value="3" />
+                </p:menuitem>
+            </p:tabMenu>
+                 
+    <p:growl id="growl" sticky="true" showDetail="true"/>
+ 
+    <p:wizard flowListener="#{opretVikarBean.onFlowProcess}">
+        <p:tab id="personal" title="Personal">
+            <p:panel header="Personal Details">
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                    <h:outputText value="Fornavn *" />
+                    <p:inputText value="#{opretVikarBean.user.name}" required="true" label="Firstname"/>
+ 
+                    <h:outputText value="Mellemnavn " />
+                    <p:inputText value="#{opretVikarBean.user.middlename}"  label="Middlename"/>
+                    
+                    <h:outputText value="Efternavn *" />
+                    <p:inputText value="#{opretVikarBean.user.surname}" label="Lastname"/>
+ 
+                    <h:outputText value="Mobil nr *" />
+                    <p:inputText value="#{opretVikarBean.user.mobilePhone}" required="true" label="MobilePhone"/>
+                    
+                    <h:outputText value="Anden tlf nr " />
+                    <p:inputText value="#{opretVikarBean.user.homePhone}" label="HomePhone"/>
+                    
+                    <h:outputText value="Email *" />
+                    <p:inputText value="#{opretVikarBean.user.emailAddress}" required="true" label="Email"/>
+                    
+                    <h:outputText value="Kodeord " />
+                    <p:inputText value="#{opretVikarBean.user.password}" required="true" label="Kodeord"/>
+                    
+                    <h:outputText value="Addresse " />
+                    <p:inputText value="#{opretVikarBean.user.homeAddress}" label="HomeAddress"/>
+                    
+                    <p:outputLabel for="greenZone" value="Grøn zone" />
+                    <p:selectOneMenu id="greenZone" value="#{opretVikarBean.user.expertises['green']}"> 
+                        <f:selectItem itemLabel="Vælg et niveau" itemValue="" />
+                        <f:selectItem itemLabel="0" itemValue="0" />
+                        <f:selectItem itemLabel="1" itemValue="1" />
+                        <f:selectItem itemLabel="2" itemValue="2" />
+                    </p:selectOneMenu>
+                    
+                    <p:outputLabel for="redZone" value="Rød zone" />
+                    <p:selectOneMenu id="redZone" value="#{opretVikarBean.user.expertises['red']}"> 
+                        <f:selectItem itemLabel="Vælg et niveau" itemValue="" />
+                        <f:selectItem itemLabel="0" itemValue="0" />
+                        <f:selectItem itemLabel="1" itemValue="1" />
+                        <f:selectItem itemLabel="2" itemValue="2" />
+                    </p:selectOneMenu>
+                    
+                    <p:outputLabel for="blueZone" value="Blå zone" />
+                    <p:selectOneMenu id="blueZone" value="#{opretVikarBean.user.expertises['blue']}"> 
+                        <f:selectItem itemLabel="Vælg et niveau" itemValue="" />
+                        <f:selectItem itemLabel="0" itemValue="0" />
+                        <f:selectItem itemLabel="1" itemValue="1" />
+                        <f:selectItem itemLabel="2" itemValue="2" />
+                    </p:selectOneMenu>
+                    
+                    <p:outputLabel for="orangeZone" value="Orange zone" />
+                    <p:selectOneMenu id="orangeZone" value="#{opretVikarBean.user.expertises['orange']}"> 
+                        <f:selectItem itemLabel="Vælg et niveau" itemValue="" />
+                        <f:selectItem itemLabel="0" itemValue="0" />
+                        <f:selectItem itemLabel="1" itemValue="1" />
+                        <f:selectItem itemLabel="2" itemValue="2" />
+                    </p:selectOneMenu>
+                    
+                    <h:outputText value="Administrator " />
+                    <p:selectBooleanCheckbox value="#{opretVikarBean.user.admin}" label="Admin"> 
+                           <p:ajax/>
+                    </p:selectBooleanCheckbox>
+                    
+                    <h:outputText value="* - Skal udfyldes"/>
+                    
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+ 
+        <p:tab id="confirm" title="Confirmation">
+            <p:panel header="Confirmation">
+                <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                    <h:panelGrid columns="2" columnClasses="label, value">
+                        <h:outputText value="Fornavn: " />
+                        <h:outputText value="#{opretVikarBean.user.name}" styleClass="outputLabel"/>
+ 
+                        <h:outputText value="Mellemnavn: " />
+                        <h:outputText value="#{opretVikarBean.user.middlename}" styleClass="outputLabel"/>
+                        
+                        <h:outputText value="Efternavn: " />
+                        <h:outputText value="#{opretVikarBean.user.surname}" styleClass="outputLabel"/>
+                        
+                        <h:outputText value="Email: " />
+                        <h:outputText value="#{opretVikarBean.user.emailAddress}" styleClass="outputLabel"/>
+ 
+                        <h:outputText value="Mobil nr: " />
+                        <h:outputText value="#{opretVikarBean.user.mobilePhone}" styleClass="outputLabel"/>
+                        
+                        <h:outputText value="Anden tlf nr: " />
+                        <h:outputText value="#{opretVikarBean.user.homePhone}" styleClass="outputLabel"/>
+                        
+                        <h:outputText value="Addresse: " />
+                        <h:outputText value="#{opretVikarBean.user.homeAddress}" styleClass="outputLabel"/>
+                        
+                        <h:outputText value="Administrator: " />
+                        <h:outputText value="#{opretVikarBean.user.admin}" styleClass="outputLabel"/>
+
+                    </h:panelGrid>
+                </h:panelGrid>
+ 
+                <p:commandButton value="Submit" actionListener="#{opretVikarBean.opretVikar}" update="growl" process="@this"/>
+            </p:panel>
+        </p:tab>
+    </p:wizard>
+ 
+</h:form>
+    </h:body>
+</html>
