@@ -126,6 +126,27 @@ public class Service {
        
     }
     
+    public void ConfirmSwap(Shift shift1, Shift shift2)
+    {
+        Shift temp1 = shift1;
+        Shift temp2 = shift2;
+        
+        shift1.setSubstitute(temp2.getSubstitute());
+        shift2.setSubstitute(temp1.getSubstitute());
+        
+         Connection conn = null;
+         try{
+            conn = ConnectionToDB.getConnection();
+            s = conn.createStatement();
+          s.execute("UPDATE SHIFTS SET user_mobilephone=" + shift1.getSubstitute().getMobilePhone());
+         s.execute("UPDATE SHIFTS SET user_mobilephone=" + shift2.getSubstitute().getMobilePhone());
+  
+           
+         } catch(SQLException e){
+            System.out.println("SQL Exception" + e.getMessage());
+        }
+    }
+    
    
     public void RequestShift(Shift shift, User user){
         Connection conn = null;
