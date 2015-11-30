@@ -168,6 +168,8 @@ public class OpretVikarBean implements Serializable {
             conn = ConnectionToDB.getConnection();
             s = conn.prepareStatement(
                     "INSERT INTO users values(?, ? ,? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+            
+            
 
             s.setString(1, user.getExpertises().get("orange") + "");
             s.setString(2, user.getExpertises().get("blue") + "");

@@ -1,15 +1,18 @@
 package Service;
  
 import Model.ConnectionToDB;
+import static Model.LoginBean.s;
 import Model.Shift;
 import Model.User;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
  
@@ -73,6 +76,43 @@ public class Service {
    
     public ArrayList< User> getUsers() {
         return users;
+    }
+    
+    public String CreateUser(boolean admin, String name, String middlename, String surname, String mobilePhone, String homePhone, String emailAddress, String homeAddress, String password, String red, int redKey, String orange, int orangeKey, String blue, int blueKey, String green, int greenKey, HashMap<String, Integer> expertises) throws SQLException {
+        Connection conn = null;
+        String toReturn = null;
+        expertises.put(blue, blueKey);
+        expertises.put(red, redKey);
+        expertises.put(orange, orangeKey);
+        expertises.put(green, greenKey);
+        
+        
+        
+        try {
+            conn = ConnectionToDB.getConnection();
+          
+            PreparedStatement s1 = conn.prepareStatement(
+                    "INSERT INTO users values(?, ? ,? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+            s1.setString(1, expertises.get("blue") + "");
+            s1.setString(2, expertises.get("green") + "");
+            s1.setString(3, expertises.get("orange") + "");
+            s1.setString(4, expertises.get("red") + "");
+            s1.setString(5, name);
+            s1.setString(6, middlename);
+            s1.setString(7, surname);
+            s1.setString(8, mobilePhone);
+            s1.setString(9, homePhone);
+            s1.setString(10, emailAddress);
+            s1.setString(11, homeAddress);
+            s1.setString(12, Integer.toString(isAdmin(admin)));
+            s1.setString(13, password);
+            System.out.println(s + "bane?");
+            s1.executeQuery();
+
+        } catch (SQLException e) {
+            System.out.println("Sql Exception :" + e.getMessage());
+        }
+        return toReturn;
     }
    
    public static Shift createShift(Date startDate, Date endDate, LocalTime startTime, LocalTime endTime, String zone){
@@ -168,6 +208,16 @@ public class Service {
       }
         } catch(SQLException e){
             System.out.println("SQL Exception" + e.getMessage());
+        }
+    }
+    
+    public int isAdmin(boolean admin){
+        
+        if(admin == true){
+            return 1;
+        }
+        else{
+            return 0;
         }
     }
     
