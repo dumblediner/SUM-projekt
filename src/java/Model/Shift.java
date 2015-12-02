@@ -10,71 +10,79 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalTime;
 import java.util.ArrayList;
  
 /**
  *
  * @author Mikkel
  */
+
 public class Shift {
     private Date startDate;
     private Date endDate;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private String startTime;
+    private String endTime;
     private String expertise; //Typen skal muligvis ændres
     private ArrayList<User> unassignedList;
     private User substitute;
     private int id;
-   
-    public Shift(Date Startdate, Date Enddate, LocalTime startTime, LocalTime endTime, String expertise){
-        this.startDate = Startdate;
-        this.endDate = Enddate;
+ 
+    public Shift(Date startDate,Date endDate, String startTime, String endTime, String zone){
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.expertise = expertise;
+        this.expertise = zone;
         this.unassignedList = new ArrayList<>();
-        
-        
+       
     }
-
+ 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
  
     public Date getStartDate() {
         return startDate;
     }
  
-    public void setStartDate(Date date) {
-        this.startDate = date;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
-    
-       public Date getEndDate() {
+ 
+    public Date getEndDate() {
         return endDate;
     }
  
-    public void setEndDate(Date date) {
-        this.endDate = date;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
  
-    public LocalTime getStartTime() {
+    public void setId(int id) {
+        this.id = id;
+    }
+ 
+    public Date getstartDate() {
+        return startDate;
+    }
+ 
+    public void setstartDate(Date date) {
+        this.startDate = date;
+    }
+ 
+   
+    public String getStartTime() {
         return startTime;
     }
  
-    public void setStartTime(LocalTime startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
  
-    public LocalTime getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
  
-    public void setEndTime(LocalTime endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
  
@@ -102,7 +110,7 @@ public class Shift {
         ResultSet rs = s.getResultSet();
         while(rs.next()){
            String mobile = rs.getString("user_mobilephone");
-            s.executeQuery("SELECT * FROM users WHERE mobilephone=" + mobile);
+            s.executeQuery("SELECT * FROM user WHERE mobilephone=" + mobile);
             while(rs.next()){
                 boolean admin = rs.getBoolean("adminboolean");
                 String name = rs.getString("name");
@@ -113,7 +121,7 @@ public class Shift {
                 String emailaddress = rs.getString("emailaddress");
                 String homeaddress = rs.getString("homeaddress");
                 String pw = rs.getString("pw");
-                
+               
                 User user = new User(admin, name, middlename, lastname, mobilephone, homephone, emailaddress, homeaddress, pw);
                 unassignedList.add(user);
             }

@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +23,7 @@ public class Service {
    
     private final ArrayList<User> users;
     private final ArrayList<Shift> substituteList;
-    private Statement s;
+    private static Statement s;
     private ResultSet rs;
     private String str;
    
@@ -78,7 +79,7 @@ public class Service {
         return users;
     }
     
-    public String CreateUser(boolean admin, String name, String middlename, String surname, String mobilePhone, String homePhone, String emailAddress, String homeAddress, String password, String red, int redKey, String orange, int orangeKey, String blue, int blueKey, String green, int greenKey, HashMap<String, Integer> expertises) throws SQLException {
+    public static String createUser(boolean admin, String name, String middlename, String surname, String mobilePhone, String homePhone, String emailAddress, String homeAddress, String password, String red, int redKey, String orange, int orangeKey, String blue, int blueKey, String green, int greenKey, HashMap<String, Integer> expertises) throws SQLException {
         Connection conn = null;
         String toReturn = null;
         expertises.put(blue, blueKey);
@@ -115,21 +116,25 @@ public class Service {
         return toReturn;
     }
    
-   public static Shift createShift(Date startDate, Date endDate, LocalTime startTime, LocalTime endTime, String zone){
-     // Shift newShift = new Shift(date,startTime,endTime, zone);
-      String getId = "SELECT id FROM shifts WHERE id=(SELECT max(id) FROM shifts)";
+   public static Shift createShift(Date startDate, Date endDate, String startTime, String endTime, String zone){
+     // OBS Varchar i DB Date i koden. check it out
+      String getId = "SELECT shiftid FROM shifts WHERE shiftid=(SELECT max(shiftid) FROM shifts)";
      
       try{
           int id = 0;
          Connection conn = ConnectionToDB.getConnection();
         Statement s = conn.createStatement();
+        
          s.executeQuery(getId);
         ResultSet rs = s.getResultSet();
+        
         while(rs.next()){
-          id = rs.getInt("id");
+          id = rs.getInt("shiftid");
+         
           id++;
         }
-         String sql = "INSERT INTO shifts VALUES ('"+id+"','"+startDate+"','" +endDate+"','"+startTime+"','"+endTime+"','"+zone+"')";
+         String sql = "INSERT INTO shifts VALUES ('"+id+"','"+startDate+"','" +endDate+"','"+startTime+"','"+endTime+"','"+zone+"',"+null+")";
+          System.out.println(sql);
          s.execute(sql);   
       }
       catch (SQLException e){
@@ -211,7 +216,7 @@ public class Service {
         }
     }
     
-    public int isAdmin(boolean admin){
+    public static int isAdmin(boolean admin){
         
         if(admin == true){
             return 1;
@@ -221,6 +226,67 @@ public class Service {
         }
     }
     
-   
- 
+    public static ArrayList<DefaultScheduleEvent> loadShifts(){
+        ArrayList<DefaultScheduleEvent> list = new ArrayList<DefaultScheduleEvent>();
+       
+        try{
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dff = new SimpleDateFormat("hh");
+        Connection conn = ConnectionToDB.getConnection();
+        Statement s = conn.createStatement();
+           
+        String sql = "select * from shifts";
+        s.execute(sql);
+           
+        ResultSet rs = s.getResultSet();
+        while(rs.next()){
+            int id = rs.getInt("shiftid");
+            String startddate = rs.getString(2);
+            System.out.println("DAG 1" + startddate);
+            java.util.Date startDate = df.parse(startddate);
+            String slutddate = rs.getString(3);
+            System.out.println("DAG 2"+ slutddate);
+            java.util.Date endDate = df.parse(slutddate);
+            String startTime = rs.getString(4);
+            String endTime = rs.getString(5);
+            String zone = rs.getString("zone");
+            int startTTime = Integer.parseInt(startTime);
+            int endTTime = Integer.parseInt(endTime);
+            startDate.setHours(startTTime);
+            endDate.setHours(endTTime);
+           
+           
+//            Calendar t = Calendar.getInstance();
+//            //startDate.setHours(Integer.parseInt(startTime));
+//            //endDate.setHours(Integer.parseInt(endTime));
+//            System.out.println("PIIIIIIIIIIIIIK: " + startDate);
+//            
+//            t.set(t.get(Calendar.YEAR), t.get(Calendar.MONTH), t.get(Calendar.DATE), 0, 0, 0);
+//            t.set(Calendar.DAY_OF_YEAR, startDate.getYear());
+//            t.set(Calendar.DAY_OF_MONTH, startDate.getMonth());
+//            t.set(Calendar.DATE, startDate.getDay());
+//          
+//            t.set(Calendar.HOUR,startTime.getHours());
+//          
+//            Calendar tt = Calendar.getInstance();
+//            tt.set(tt.get(Calendar.YEAR), tt.get(Calendar.MONTH), tt.get(Calendar.DATE), 0, 0, 0);
+//            tt.set(Calendar.DAY_OF_YEAR, endDate.getYear());
+//            tt.set(Calendar.DAY_OF_MONTH, endDate.getMonth());
+//            tt.set(Calendar.DATE, endDate.getDay());
+//            tt.set(Calendar.HOUR,endTime.getHours());
+            System.out.println("STARTDATE: "+startDate + "ENDDATE: " + endDate);
+            Shift s1 = new Shift(startDate,endDate,startTime,endTime,zone);
+            DefaultScheduleEvent e = new DefaultScheduleEvent("vagt",startDate,endDate,s1);
+            //System.out.println("S1s starttid"+ s1.getStartDate()+"S1 endtime"+ s1.getEndDate()+"T0 " + t.getTime()+"TTTT"+tt.getTime());
+            list.add(e);
+        }
+           
+           
+        }
+        catch (Exception e){
+           System.out.println(e.getMessage());
+        }
+       
+        return list;
+    }
 }

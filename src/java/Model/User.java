@@ -34,6 +34,8 @@ public class User {
         this.homeAddress = homeAddress;
         this.password = password;
     }
+ 
+ public User(){}
    
  
    

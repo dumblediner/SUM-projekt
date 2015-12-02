@@ -29,6 +29,11 @@
                 <p:menuitem value="Log ud" action="#{loginBean.logout}" icon="ui-icon-cancel">
                     <f:param name="i" value="3" />
                 </p:menuitem>
+                
+                 <p:menuitem value="Administrer vagter" outcome="createShift" icon="ui-icon-star">
+                    <f:param name="i" value="4"/>
+                </p:menuitem>
+                
             </p:tabMenu>
             <h3>Logget ind(ADMIN) som: #{loginBean.user.emailAddress}</h3>
 
